@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose')
 
 const Noteschema = new Schema({
-    tille:{
+    title:{
         type: String,
         required: true
     },
