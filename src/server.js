@@ -10,7 +10,7 @@ const passport = require('passport');
 
 // Inicializaciones
 const app = express();
-require('./config/passpord')
+require('./config/passport')
 
 // Configuraciones
 app.set("port", process.env.PORT || 3000);
@@ -31,12 +31,13 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(session({
-  secret: 'secre',
+  secret: 'secret',
   resave: true,
   saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(flash());
 
 

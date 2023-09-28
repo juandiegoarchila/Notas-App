@@ -1,6 +1,6 @@
 const userCtrol = {};
 
-const passpord = require('passport');
+const passport = require('passport');
 
 const User = require('../models/User')
 
@@ -11,6 +11,7 @@ userCtrol.rendersigUnForm = (req, res ) =>{
 
 userCtrol.signup = async (req, res) =>{
     const errors = [];
+    
     const {name, email, password, confirm_password} = req.body;
     if(password != confirm_password) {
         errors.push({text: 'la contraseña no coincide'})
@@ -46,12 +47,14 @@ userCtrol.rendersigninForm = (req, res) => {
     res.render('users/signin');
 }
 
-userCtrol.signin = passpord.authenticate('local', {
-    failureRedirect: '/users/signin',
-    successRedirect: '/notes',
-    failureFlash: true
-});
-
+userCtrol.signin = async (req, res, next) => {
+    passport.authenticate('local', {
+      failureRedirect: '/users/signin',
+      successRedirect: '/notes',
+      failureFlash: true
+    })(req, res, next);
+  };
+  
 
 
 userCtrol.logout = (req, res) =>{
