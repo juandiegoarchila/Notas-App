@@ -58,7 +58,11 @@ userCtrol.signin = async (req, res, next) => {
 
 
 userCtrol.logout = (req, res) =>{
-    res.send('logout')
+    req.logout((err) =>{
+        if (err){return next(err);}
+        req.flash('success_msg', 'session cerrada');
+        res.redirect('/users/signin')
+        });
 }
 
 
